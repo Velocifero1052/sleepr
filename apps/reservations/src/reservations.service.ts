@@ -10,23 +10,26 @@ export class ReservationsService {
     return this.reservationRepository.create({
       ...createReservationDto,
       timestamp: new Date(),
-      userId: '132',
+      userId: '123',
     });
   }
 
   findAll() {
-    return `This action returns all reservations`;
+    return this.reservationRepository.find({});
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} reservation`;
+  findOne(_id: string) {
+    return this.reservationRepository.findOne({ _id });
   }
 
-  update(id: number, updateReservationDto: UpdateReservationDto) {
-    return `This action updates a #${id} reservation`;
+  update(_id: string, updateReservationDto: UpdateReservationDto) {
+    return this.reservationRepository.findOneAndUpdate(
+      { _id },
+      { $set: updateReservationDto },
+    );
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} reservation`;
+  remove(_id: string) {
+    return this.reservationRepository.findOneAndDelete({ _id });
   }
 }
